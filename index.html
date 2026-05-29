@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+
+    <title>Raghav Kishore | Portfolio</title>
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --border: #334155;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #0284c7;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: 0.3s ease;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* THEME BUTTON */
+
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        /* HEADER */
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .links {
+            margin-top: 25px;
+        }
+
+        .links a {
+            text-decoration: none;
+            margin: 5px;
+            padding: 12px 18px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .links a:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* SECTION */
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            font-size: 32px;
+        }
+
+        /* GRID */
+
+        .skills-grid,
+        .grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .grid {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        /* SKILL CARD */
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .skill-list {
+            list-style: none;
+            color: var(--text-muted);
+        }
+
+        .skill-list li {
+            margin-bottom: 8px;
+        }
+
+        /* PROJECT CARDS */
+
+        .card {
+            background: linear-gradient(145deg, #1e293b, #172033);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        /* TAGS */
+
+        .tags {
+            margin-top: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+            font-weight: bold;
+        }
+
+        /* LINKS */
+
+        .card-links a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card-links a:hover {
+            opacity: 0.85;
+        }
+
+        /* FILTER */
+
+        .filter-container {
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            padding: 10px 18px;
+            border: none;
+            margin-right: 10px;
+            background: var(--card-bg);
+            color: var(--text-main);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* LOGIN */
+
+        form {
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        input,
+        button {
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #errorMsg {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #lockMessage {
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px) {
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="theme-toggle-btn"
+        id="themeToggle">
+        ☀️ Light Mode
+    </button>
+
+    <div class="container">
+
+        <!-- HERO -->
+
+        <header>
+
+            <h1>Raghav Kishore</h1>
+
+            <div class="subtitle">
+                Full-Stack Developer | BCA Graduate
+            </div>
+
+            <p class="bio">
+                Passionate about building scalable web applications
+                with robust backends, secure databases and clean UI/UX.
+            </p>
+
+            <div class="links">
+
+                <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                    target="_blank">
+                    GitHub
+                </a>
+
+                <a href="https://www.linkedin.com/in/raghav-kishore-a6523b390"
+                    target="_blank">
+                    LinkedIn
+                </a>
+
+                <a href="mailto:kishoreraghav28@gmail.com">
+                    Email Me
+                </a>
+
+            </div>
+
+        </header>
+
+        <!-- SKILLS -->
+
+        <section>
+
+            <h2>Technical Skills</h2>
+
+            <div class="skills-grid">
+
+                <div class="skill-card">
+
+                    <h3>Frontend</h3>
+
+                    <ul class="skill-list">
+                        <li>HTML5 / CSS3 / JavaScript</li>
+                        <li>React.js</li>
+                        <li>Responsive Design</li>
+                    </ul>
+
+                </div>
+
+                <div class="skill-card">
+
+                    <h3>Backend</h3>
+
+                    <ul class="skill-list">
+                        <li>Node.js / Express.js</li>
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>PHP</li>
+                        <li>VB.NET</li>
+                    </ul>
+
+                </div>
+
+                <div class="skill-card">
+
+                    <h3>Databases & Tools</h3>
+
+                    <ul class="skill-list">
+                        <li>MongoDB / MySQL</li>
+                        <li>Git & GitHub</li>
+                        <li>REST API</li>
+                        <li>LeetCode</li>
+                    </ul>
+
+                </div>
+
+                <div class="skill-card">
+
+                    <h3>Additional Skills</h3>
+
+                    <ul class="skill-list">
+                        <li>Cyber Security</li>
+                        <li>Networking</li>
+                        <li>Cryptography</li>
+                        <li>Algorithms</li>
+                        <li>Mathematics</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PROJECTS -->
+
+        <section>
+
+            <h2>Featured Projects</h2>
+
+            <div class="filter-container">
+
+                <button class="filter-btn active"
+                    data-filter="all">
+                    All
+                </button>
+
+                <button class="filter-btn"
+                    data-filter="frontend">
+                    Frontend
+                </button>
+
+                <button class="filter-btn"
+                    data-filter="backend">
+                    Backend
+                </button>
+
+                <button class="filter-btn"
+                    data-filter="fullstack">
+                    Full Stack
+                </button>
+
+            </div>
+
+            <div class="grid">
+
+                <!-- PROJECT 1 -->
+
+                <div class="card"
+                    data-category="frontend">
+
+                    <h3>E-Commerce Interface</h3>
+
+                    <div class="tags">
+                        <span class="tag">React.js</span>
+                        <span class="tag">CSS</span>
+                    </div>
+
+                    <p>
+                        Responsive shopping application with authentication,
+                        product listing and cart system.
+                    </p>
+
+                    <div class="card-links">
+
+                        <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                            target="_blank">
+                            View Project
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- PROJECT 2 -->
+
+                <div class="card"
+                    data-category="backend">
+
+                    <h3>Task Management API</h3>
+
+                    <div class="tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">JWT</span>
+                    </div>
+
+                    <p>
+                        Secure REST API with CRUD operations,
+                        authentication and authorization.
+                    </p>
+
+                    <div class="card-links">
+
+                        <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                            target="_blank">
+                            View Project
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- PROJECT 3 -->
+
+                <div class="card"
+                    data-category="fullstack">
+
+                    <h3>Online Learning Platform</h3>
+
+                    <div class="tags">
+                        <span class="tag">React.js</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+
+                    <p>
+                        Full-stack e-learning platform with authentication,
+                        course management and progress tracking.
+                    </p>
+
+                    <div class="card-links">
+
+                        <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                            target="_blank">
+                            View Project
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- PROJECT 4 -->
+
+                <div class="card"
+                    data-category="fullstack">
+
+                    <h3>Hospital Management System</h3>
+
+                    <div class="tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+
+                    <p>
+                        Complete hospital management system with patient records,
+                        appointments and secure admin dashboard.
+                    </p>
+
+                    <div class="card-links">
+
+                        <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                            target="_blank">
+                            View Project
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- BLOG -->
+
+        <section>
+
+            <h2>Technical Blog / Insights</h2>
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <h3>MVC Architecture</h3>
+
+                    <p>
+                        Understanding clean backend architecture
+                        using Model View Controller pattern.
+                    </p>
+
+                    <div class="card-links">
+
+                        <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                            target="_blank">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>MySQL Optimization</h3>
+
+                    <p>
+                        Improving query performance using indexing,
+                        joins and optimized database design.
+                    </p>
+
+                    <div class="card-links">
+
+                        <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                            target="_blank">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- LOGIN -->
+
+        <section>
+
+            <h2>Admin Login</h2>
+
+            <div id="lockMessage">
+                Too many failed attempts.
+                Try again after 10 minutes.
+            </div>
+
+            <form id="adminForm">
+
+                <input type="text"
+                    id="username"
+                    placeholder="Enter Username"
+                    required>
+
+                <input type="password"
+                    id="password"
+                    placeholder="Enter Password"
+                    required>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <p id="errorMsg"></p>
+
+        </section>
+
+    </div>
+
+    <script>
+
+        // THEME TOGGLE
+
+        const themeToggle =
+            document.getElementById('themeToggle');
+
+        themeToggle.addEventListener('click', () => {
+
+            const currentTheme =
+                document.documentElement.getAttribute('data-theme');
+
+            if (currentTheme === 'light') {
+
+                document.documentElement.removeAttribute('data-theme');
+
+                themeToggle.textContent =
+                    '☀️ Light Mode';
+
+            } else {
+
+                document.documentElement.setAttribute('data-theme', 'light');
+
+                themeToggle.textContent =
+                    '🌙 Dark Mode';
+            }
+
+        });
+
+        // PROJECT FILTER
+
+        const filterButtons =
+            document.querySelectorAll('.filter-btn');
+
+        const cards =
+            document.querySelectorAll('.card');
+
+        filterButtons.forEach(button => {
+
+            button.addEventListener('click', () => {
+
+                filterButtons.forEach(btn =>
+                    btn.classList.remove('active'));
+
+                button.classList.add('active');
+
+                const filter =
+                    button.getAttribute('data-filter');
+
+                cards.forEach(card => {
+
+                    if (
+                        filter === 'all' ||
+                        card.getAttribute('data-category') === filter ||
+                        !card.getAttribute('data-category')
+                    ) {
+
+                        card.classList.remove('hidden');
+
+                    } else {
+
+                        card.classList.add('hidden');
+                    }
+
+                });
+
+            });
+
+        });
+
+        // LOGIN SYSTEM
+
+        const adminForm =
+            document.getElementById('adminForm');
+
+        const errorMsg =
+            document.getElementById('errorMsg');
+
+        const lockMessage =
+            document.getElementById('lockMessage');
+
+        let attempts = 0;
+
+        // CHECK LOCK
+
+        const lockUntil =
+            localStorage.getItem('lockUntil');
+
+        if (
+            lockUntil &&
+            Date.now() < parseInt(lockUntil)
+        ) {
+
+            adminForm.style.display = 'none';
+
+            lockMessage.style.display = 'block';
+        }
+
+        adminForm.addEventListener('submit', function (e) {
+
+            e.preventDefault();
+
+            const username =
+                document.getElementById('username').value;
+
+            const password =
+                document.getElementById('password').value;
+
+            // LOGIN CHECK
+
+            if (
+                username === 'admin' &&
+                password === '123456'
+            ) {
+
+                const newPage =
+                    window.open("", "_blank");
+
+                newPage.document.write(`
+
+                    <html>
+
+                    <head>
+
+                        <title>Welcome</title>
+
+                        <style>
+
+                            body{
+                                background:#0f172a;
+                                color:white;
+                                font-family:Arial;
+                                text-align:center;
+                                padding:50px;
+                            }
+
+                            .box{
+                                background:#1e293b;
+                                padding:40px;
+                                border-radius:15px;
+                                max-width:500px;
+                                margin:auto;
+                            }
+
+                            a{
+                                text-decoration:none;
+                                color:white;
+                                background:#38bdf8;
+                                padding:12px 20px;
+                                border-radius:8px;
+                                display:inline-block;
+                                margin:10px;
+                            }
+
+                        </style>
+
+                    </head>
+
+                    <body>
+
+                        <div class="box">
+
+                            <h1>Welcome Raghav 👋</h1>
+
+                            <p>
+                                Admin Login Successful
+                            </p>
+
+                            <a href="https://github.com/BCA-RaghavKishore?tab=repositories"
+                                target="_blank">
+                                GitHub
+                            </a>
+
+                            <a href="https://www.linkedin.com/in/raghav-kishore-a6523b390"
+                                target="_blank">
+                                LinkedIn
+                            </a>
+
+                        </div>
+
+                    </body>
+
+                    </html>
+
+                `);
+
+            } else {
+
+                attempts++;
+
+                errorMsg.textContent =
+                    "Wrong username or password.";
+
+                // LOCK AFTER 3 ATTEMPTS
+
+                if (attempts >= 3) {
+
+                    adminForm.style.display = 'none';
+
+                    lockMessage.style.display = 'block';
+
+                    const lockTime =
+                        Date.now() + (10 * 60 * 1000);
+
+                    localStorage.setItem(
+                        'lockUntil',
+                        lockTime
+                    );
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+```
